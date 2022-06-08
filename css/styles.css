@@ -26,10 +26,13 @@
  margin: 0; 
  box-sizing: content-box;
 }
+html { height: 100vh; }
+
 body {
   background-color: var(--background);
   color: var(--fontColor);
   overflow-x: hidden;
+  height: 100%;
 }
 #header {
   background-color: var(--color-one);
@@ -49,7 +52,7 @@ body {
 .bxy-learn-intro {
   background: var(--background);
   padding: 100px 0;
-  height: 50vh;
+  height: 50%;
 }
 .bxy-learn-container {
   width: 90%;
@@ -73,7 +76,7 @@ body {
   position: relative;
   width: 10px;
   margin: 0 auto;
-  margin-left: 20px;
+  margin-left: 15px;
   padding-top: 50px;
   background: var(--color-three);
 }
@@ -101,7 +104,7 @@ body {
 .bxy-timeline ul li div {
   position: relative;
   bottom: 0;
-  width: calc(100vw - 100px);
+  width: calc(100vw - 110px);
   padding: 15px;
   background: var(--color-one);
   border: 1px solid var(--fontColor);
