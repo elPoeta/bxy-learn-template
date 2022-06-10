@@ -37,8 +37,8 @@ class Block {
     this.incrementWidthRightLine = 0;
     this.parentId = null;
     this.isProgram = isProgram;
-    this.fontSize = 20;
-    this.fontSizeCode = 20;
+    this.fontSize = 16;
+    this.fontSizeCode = 16;
     this.textProps = { startText: 10, verticalAlignText: 1.5, substring: 10 };
     this.fontName = "Roboto";
     this.languageOutput = languageOutput;

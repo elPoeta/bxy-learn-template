@@ -1,5 +1,7 @@
 class CogwheelBlock {
   constructor(canvas, x, y, w, h, shiftX, shiftY, blockId) {
+    shiftX /= 1.5;
+    shiftY /= 1.5;
     this.c = canvas;
     this.x = x + w + shiftX;
     this.y = y + shiftY;

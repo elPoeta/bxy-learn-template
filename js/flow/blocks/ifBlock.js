@@ -60,7 +60,7 @@ class IfBlock extends Block {
     this.errorTxtH = 35;
     this.textProps = {
       startText: 10,
-      verticalAlignText: 33,
+      verticalAlignText: 28,
       horizontalAlignText: 19,
       substring: 10,
     };
