@@ -260,7 +260,9 @@ class FlowAPI {
           const { id, hook, prev } = props;
           let { type } = props;
           type = `${type}Block`;
-          const { w, h } = this.getWidthAndHeigthBlock(type);
+          let { w, h } = this.getWidthAndHeigthBlock(type);
+          w /= 1.5;
+          h /= 1.5;
           const wrapType = type !== "wrapBlock" ? "" : props.vars.wrapType;
           this.createNewProgram(id, type, 0, 0, w, h, "", wrapType);
           const indexHook = this.c.program.findIndex(
@@ -311,7 +313,9 @@ class FlowAPI {
           const { id, ring } = props;
           let { type } = props;
           type = `${type}Block`;
-          const { w, h } = this.getWidthAndHeigthBlock(type);
+          let { w, h } = this.getWidthAndHeigthBlock(type);
+          w /= 1.5;
+          h /= 1.5;
           const wrapType = type !== "wrapBlock" ? "" : props.vars.wrapType;
           this.createNewProgram(id, type, 0, 0, w, h, "", wrapType);
           if (ring === "not-occupied") {

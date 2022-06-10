@@ -273,7 +273,7 @@ class CanvasFlow {
         "startBlock",
         this.ctx.canvas.width / 2,
         20,
-        12 / 1.5,
+        120 / 1.5,
         60 / 1.5,
         `Start flowchart | OutPut code ${this.languageOutput}`,
         false,
@@ -327,7 +327,7 @@ class CanvasFlow {
     this.workspaceGrabed = false;
     this.isResize = false;
     this.ctxLineWidth = 3;
-    this.widthLine = 60;
+    this.widthLine = 60 / 1.5;
     this.editorErrors = null;
     this.expanded = false;
     this.fullCode = "";
