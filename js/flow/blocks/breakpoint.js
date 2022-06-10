@@ -10,7 +10,7 @@ class Breakpoint {
   }
 
   render() {
-    this.c.ctx.lineWidth = 2;
+    this.c.ctx.lineWidth = 1; //2
     this.c.ctx.strokeStyle = "#7a280c";
     this.c.ctx.fillStyle = this.color;
     this.c.ctx.beginPath();

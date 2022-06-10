@@ -74,7 +74,7 @@ class CanvasFlow {
     this.selectBlock = null;
     this.out = "";
     this.outs = [];
-    this.ctxLineWidth = 3;
+    this.ctxLineWidth = 2; //3
     this.colors = {
       ligthBlue: "#2393d8d6",
       red: "#ff2323bf",
@@ -326,7 +326,7 @@ class CanvasFlow {
     flowChartEditor.hideConsole();
     this.workspaceGrabed = false;
     this.isResize = false;
-    this.ctxLineWidth = 3;
+    this.ctxLineWidth = 2; //3
     this.widthLine = 60 / 1.5;
     this.editorErrors = null;
     this.expanded = false;
@@ -559,7 +559,7 @@ class CanvasFlow {
   }
 
   updateRenderWorkspace() {
-    this.ctx.lineWidth = 3;
+    this.ctx.lineWidth = 2; //3
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.save();
     this.ctx.setTransform(
@@ -607,7 +607,7 @@ class CanvasFlow {
   updateRenderPalette() {
     this.ctx.fillStyle = this.paletteColor;
     this.ctx.fillRect(0, 0, 120, this.canvas.height); // 200 150 100
-    this.ctx.lineWidth = 3;
+    this.ctx.lineWidth = 2; //3
     this.ctx.save();
     this.ctx.setTransform(1, 0, 0, 1, 0, this.yScrollPalette);
     if (this.paletteManager.isReadyToRender()) {
