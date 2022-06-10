@@ -110,7 +110,7 @@ class PaletteManager {
   // }
   getXWHBlockPalettePos(key) {
     const x = key !== "decision" ? 10 : 70;
-    const w = key !== "decision" ? 120 : 60;
-    return { x, w, h: 60 };
+    const w = key !== "decision" ? 120 / 1.5 : 60 / 1.5;
+    return { x, w, h: 60 / 1.5 };
   }
 }

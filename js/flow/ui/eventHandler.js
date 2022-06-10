@@ -100,13 +100,13 @@ class EventHandler {
     this.timeStampStop = 150;
     this.timeDifference = this.timeStamp;
     this.mousedownTime = 0;
-    this.widthLine = 60;
-    this.widthLoopLine = 30;
-    this.doWhileDefaultAccum = 80;
-    this.innerPlusHeight = 130;
-    this.incrementOutLine = 60;
-    this.incrementHeightRightLine = 60;
-    this.incrementHeightLeftLine = 60;
+    this.widthLine = 60 / 1.5;
+    this.widthLoopLine = 30 / 1.5;
+    this.doWhileDefaultAccum = 80 / 1.5;
+    this.innerPlusHeight = 130 / 1.5;
+    this.incrementOutLine = 60 / 1.5;
+    this.incrementHeightRightLine = 60 / 1.5;
+    this.incrementHeightLeftLine = 60 / 1.5;
     this.incrementLeftRing = 0;
     this.incrementRightRing = 0;
     this.programEdited = null;
@@ -116,15 +116,15 @@ class EventHandler {
     this.cloneBlocks = [];
     this.innerBlocks = [];
     this.addToHeight = {
-      codeBlock: 70,
-      defineBlock: 70,
-      inputBlock: 70,
-      outputBlock: 70,
-      whileBlock: 70,
-      forBlock: 70,
-      ifBlock: 70,
-      doWhileBlock: 70,
-      wrapBlock: 70,
+      codeBlock: 70 / 1.5,
+      defineBlock: 70 / 1.5,
+      inputBlock: 70 / 1.5,
+      outputBlock: 70 / 1.5,
+      whileBlock: 70 / 1.5,
+      forBlock: 70 / 1.5,
+      ifBlock: 70 / 1.5,
+      doWhileBlock: 70 / 1.5,
+      wrapBlock: 70 / 1.5,
     };
     this.lastHookIndex = -1;
     this.trashLid = document.querySelector(".lid");
@@ -675,10 +675,11 @@ class EventHandler {
     this.c.program = this.c.program.map((program) => {
       if (
         program.isTouching(x, y) ||
-        this.mouseX < 200 ||
+        this.mouseX < 200 || //150
         this.ctrlKeyPressed
       ) {
         if (this.mouseX < 200) {
+          //150
           this.c.palette.forEach((block) => {
             if (block.isTouching(this.mouseX, this.mouseY)) {
               this.paletteGrabed = false;
@@ -704,11 +705,12 @@ class EventHandler {
     this.c.palette.forEach((block) => {
       if (this.c.selectBlock) return;
       if (!this.paletteGrabbed && ev.clientX <= 200) {
+        //150
         if (block.isTouching(this.mouseX, yPalette)) {
           this.c.canvas.style.cursor = "pointer";
         } else {
           if (
-            (ev.clientX > 160 && ev.clientX <= 200) ||
+            (ev.clientX > 160 && ev.clientX <= 200) || //150
             (ev.clientX > 0 && ev.clientX <= 40)
           ) {
             this.c.canvas.style.cursor = "row-resize";
@@ -846,7 +848,7 @@ class EventHandler {
           }
           hit = true;
           this.c.tip.style.top = "40px";
-          this.c.tip.style.left = "200px";
+          this.c.tip.style.left = "200px"; //150
         }
       }
       if (!hit) {
@@ -907,6 +909,7 @@ class EventHandler {
         this.moveInnerBlocks(program);
         let ok = true;
         let okHook = false;
+        if (i == 2) console.log("$$$ ", program.w);
         this.c.program.forEach((programHook, j) => {
           if (j != i) {
             if (program.isColliding(programHook)) ok = false;
@@ -921,11 +924,11 @@ class EventHandler {
                 ) {
                   okHook = true;
                   hookIndex = j;
-                  program.x = this.setXOnDrop(
-                    program,
-                    programHook,
-                    hook.ioType
-                  );
+                  // program.x = this.setXOnDrop(
+                  //   program,
+                  //   programHook,
+                  //   hook.ioType
+                  // );
                   this.moveInnerBlocks(program);
                   this.c.interceptedProgram = {
                     programRing: program,
@@ -938,6 +941,7 @@ class EventHandler {
           }
         });
         if (this.mouseX < 200) {
+          //150
           this.c.paletteColor = this.c.colors.red;
           this.openTrash();
         } else {
@@ -1167,6 +1171,7 @@ class EventHandler {
   setXOnDrop(programRing, programHook, ioType) {
     const { hooks, x, w, type: prgHookType } = programHook;
     const { type } = programRing;
+    console.log("@@@@ ", { ...programRing, clone: true });
     let newBlockX = x;
     if (this.c.tabs[this.c.selectedTab].id != "1") {
       if (prgHookType === "ifBlock") {

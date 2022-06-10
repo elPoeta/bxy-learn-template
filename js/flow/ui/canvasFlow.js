@@ -59,9 +59,9 @@ class CanvasFlow {
     this.isResize = false;
     this.interceptedProgram = null;
     this.workspaceGrabed = false;
-    this.arrowDistance = 70;
-    this.defaultAccumulator = 130;
-    this.widthLine = 60;
+    this.arrowDistance = 70 / 1.5;
+    this.defaultAccumulator = 130 / 1.5;
+    this.widthLine = 60 / 1.5;
     this.languageOutput = "java";
     this.flowchartName = "Flowchart";
     this.pathClass = "domain.Flowchart";
@@ -273,8 +273,8 @@ class CanvasFlow {
         "startBlock",
         this.ctx.canvas.width / 2,
         20,
-        120,
-        60,
+        12 / 1.5,
+        60 / 1.5,
         `Start flowchart | OutPut code ${this.languageOutput}`,
         false,
         ""
@@ -284,9 +284,9 @@ class CanvasFlow {
         this,
         "endBlock",
         this.ctx.canvas.width / 2,
-        150,
-        120,
-        60,
+        105, //150 / 1.5,
+        120 / 1.5,
+        60 / 1.5,
         `End flowchart | OutPut code ${this.languageOutput}`,
         false,
         ""
@@ -304,7 +304,7 @@ class CanvasFlow {
       h: this.program[0].blockProps.h,
       w: this.program[0].blockProps.w,
       outHook: this.program[0].hooks[0].y,
-      heightToAdd: 70,
+      heightToAdd: 70 / 1.5,
       render: true,
     });
     this.blockState.add(this.endBlockId, {
@@ -314,7 +314,7 @@ class CanvasFlow {
       y: this.program[1].y,
       h: this.program[1].blockProps.h,
       w: this.program[1].blockProps.w,
-      heightToAdd: 70,
+      heightToAdd: 70 / 1.5,
       render: true,
       lastHook: "start-id",
       indexArrowHook: 0,
@@ -718,7 +718,6 @@ class CanvasFlow {
       .offsetWidth;
     const actualHeight = +document.querySelector(`#${this.IDCanvasContainer}`)
       .offsetHeight;
-    console.log("actualHeight", actualHeight);
     this.flowConsoleContainer.style.height = `${actualHeight - 45}px`;
     this.flowConsoleContainer.style.width = `${this.splitX}px`;
     document.querySelector(".drag-console-bar-v").style.height = `${
