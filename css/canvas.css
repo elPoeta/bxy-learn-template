@@ -17,13 +17,13 @@
   );
   height: 40px;
   display: grid;
-  grid-template-columns: 150px auto; /*200px 150px*/
+  grid-template-columns: 120px auto; /*200px 150px 120px*/
 }
 .logo-cont {
   background: #1b3f91;
   display: flex;
   align-items: center;
-  width: 150px; /* 150px - 200px*/
+  width: 120px; /* 150px - 200px 120*/
   justify-content: center;
 }
 .title {
@@ -159,7 +159,7 @@
 .canvasToolContainer {
   background: #3da0d9;
   position: absolute;
-  width: 145px; /* 195px 145px*/
+  width: 115px; /* 195px 145px 115*/
   bottom: 0;
   left: 0;
   padding-top: 10px;

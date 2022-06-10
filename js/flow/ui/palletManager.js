@@ -82,7 +82,7 @@ class PaletteManager {
       this.c,
       0,
       this.yPaletteBlockAndText,
-      150,
+      120, // 200 150 120
       15,
       LANGUAGE_FLOW[CURRENT_LANG][text],
       text,
@@ -109,7 +109,7 @@ class PaletteManager {
   //   return { x, w, h: 60 }
   // }
   getXWHBlockPalettePos(key) {
-    const x = key !== "decision" ? 10 : 70;
+    const x = key !== "decision" ? 20 : 60;
     const w = key !== "decision" ? 120 / 1.5 : 60 / 1.5;
     return { x, w, h: 60 / 1.5 };
   }
