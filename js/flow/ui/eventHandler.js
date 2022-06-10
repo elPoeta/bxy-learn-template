@@ -909,7 +909,6 @@ class EventHandler {
         this.moveInnerBlocks(program);
         let ok = true;
         let okHook = false;
-        if (i == 2) console.log("$$$ ", program.w);
         this.c.program.forEach((programHook, j) => {
           if (j != i) {
             if (program.isColliding(programHook)) ok = false;
@@ -924,11 +923,11 @@ class EventHandler {
                 ) {
                   okHook = true;
                   hookIndex = j;
-                  // program.x = this.setXOnDrop(
-                  //   program,
-                  //   programHook,
-                  //   hook.ioType
-                  // );
+                  program.x = this.setXOnDrop(
+                    program,
+                    programHook,
+                    hook.ioType
+                  );
                   this.moveInnerBlocks(program);
                   this.c.interceptedProgram = {
                     programRing: program,
@@ -1171,7 +1170,6 @@ class EventHandler {
   setXOnDrop(programRing, programHook, ioType) {
     const { hooks, x, w, type: prgHookType } = programHook;
     const { type } = programRing;
-    console.log("@@@@ ", { ...programRing, clone: true });
     let newBlockX = x;
     if (this.c.tabs[this.c.selectedTab].id != "1") {
       if (prgHookType === "ifBlock") {
