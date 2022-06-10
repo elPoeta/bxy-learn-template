@@ -26,7 +26,7 @@ class ContainerBlock extends Block {
       languageOutput
     );
     this.isEditable = false;
-    this.fontSize = 20;
+    this.fontSize = 18;
     this.radiusX = 30 / 1.5;
     this.radiusY = 60 / 1.5;
     this.ellipseW = w / 2;

@@ -4,14 +4,14 @@ class Breakpoint {
     this.x = x;
     this.y = y;
     this.blockId = blockId;
-    this.radius = 12;
+    this.radius = 12 / 1.5;
     this.id = flowChartEditor.uuid();
-    this.color = '#b9360a';
+    this.color = "#b9360a";
   }
 
   render() {
     this.c.ctx.lineWidth = 2;
-    this.c.ctx.strokeStyle = '#7a280c';
+    this.c.ctx.strokeStyle = "#7a280c";
     this.c.ctx.fillStyle = this.color;
     this.c.ctx.beginPath();
     this.c.ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
@@ -21,7 +21,8 @@ class Breakpoint {
   }
 
   isTouching(x, y) {
-    const distancesquared = (x - this.x) * (x - this.x) + (y - this.y) * (y - this.y);
+    const distancesquared =
+      (x - this.x) * (x - this.x) + (y - this.y) * (y - this.y);
     return distancesquared <= this.radius * this.radius;
   }
 
@@ -32,5 +33,4 @@ class Breakpoint {
   removeFromGlobalBreakpoint() {
     this.c.removeGlobalBreakpointById(this.blockId);
   }
-
 }
