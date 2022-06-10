@@ -59,7 +59,7 @@ class CogwheelBlock {
     this.c.ctx.arc(this.x, this.y, this.radiusH, 0, this.pi2);
     this.c.ctx.fillStyle = this.color;
     this.c.ctx.fill("evenodd");
-    this.c.ctx.lineWidth = 2;
+    this.c.ctx.lineWidth = 1; //2
     this.c.ctx.strokeStyle = "#111111";
     this.c.ctx.stroke();
   }
