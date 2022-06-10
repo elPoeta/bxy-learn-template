@@ -24,7 +24,6 @@ class CanvasFlow {
     this.consoleBoxElement = consoleBoxElement;
     this.widthBox = Number(this.flowContainer.offsetWidth);
     this.heightBox = Number(this.flowContainer.offsetHeight);
-    console.log("#H> ", this.heightBox);
     this.flowConsoleContainer = document.querySelector("#flowConsole");
     this.collapseGrowConsole = document.querySelector("#collapseConsole");
     this.splitX = this.flowConsoleContainer.getBoundingClientRect().width - 6;
@@ -607,7 +606,7 @@ class CanvasFlow {
 
   updateRenderPalette() {
     this.ctx.fillStyle = this.paletteColor;
-    this.ctx.fillRect(0, 0, 200, this.canvas.height);
+    this.ctx.fillRect(0, 0, 150, this.canvas.height);
     this.ctx.lineWidth = 3;
     this.ctx.save();
     this.ctx.setTransform(1, 0, 0, 1, 0, this.yScrollPalette);
