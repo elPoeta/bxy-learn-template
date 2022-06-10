@@ -134,7 +134,7 @@ class CanvasFlow {
     this.eventHandler = new EventHandler(this);
     window.document.addEventListener("mousemove", (event) => {
       const mouseX = event.clientX - this.xOffset;
-      const mouseY = event.clientY - this.yOffset;
+      const mouseY = event.clientY - this.yOffset + 60;
       if (this.grabSplit) {
         this.setConsoleState();
         flowChartEditor.hideConsole();
