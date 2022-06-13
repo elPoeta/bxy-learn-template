@@ -39,6 +39,22 @@ class CanvasFlow {
     this.isOpenedConsole = false;
     this.activeTour = false;
     this.showAxis = false;
+    this.fullscreenBtn = document.querySelector("#fullscreen");
+    this.fullscreenBtn.addEventListener(
+      "click",
+      this.handleFullscreen.bind(this)
+    );
+    //this.fullscreenBtn.dataset.isfullscreen = "true";
+    //document.querySelector("#bxyCanvasContainer");
+    document.addEventListener("fullscreenchange", (ev) => {
+      // if (document.fullscreenElement) {
+      //   console.log(
+      //     `Element: ${document.fullscreenElement.id} entered fullscreen mode.`
+      //   );
+      // } else {
+      //   console.log("Leaving fullscreen mode.");
+      // }
+    });
   }
 
   createDependencies() {
@@ -158,6 +174,36 @@ class CanvasFlow {
       "click",
       this.handleCollapseGrowConsole.bind(this)
     );
+  }
+
+  handleFullscreen(ev) {
+    if (document.fullscreenElement) {
+      // exitFullscreen is only available on the Document object.
+      this.exitFullscreen();
+    } else {
+      this.launchFullscreen();
+    }
+  }
+
+  async launchFullscreen() {
+    const canvasContainer = document.querySelector("#bxyCanvasContainer");
+    if (canvasContainer.requestFullscreen) {
+      await canvasContainer.requestFullscreen();
+    } else if (canvasContainer.mozRequestFullScreen) {
+      await canvasContainer.mozRequestFullScreen();
+    } else if (canvasContainer.webkitRequestFullscreen) {
+      await canvasContainer.webkitRequestFullscreen();
+    }
+  }
+
+  async exitFullscreen() {
+    if (document.exitFullscreen) {
+      await document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      await document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      await document.webkitExitFullscreen();
+    }
   }
 
   handleCollapseGrowConsole(ev) {
