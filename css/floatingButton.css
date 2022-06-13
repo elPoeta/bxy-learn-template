@@ -1,0 +1,63 @@
+.bxy-floating-button-primary-menu {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  z-index: 5;
+}
+.bxy-floating-button-primary-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 2.7rem);
+  grid-template-rows: repeat(5, 2.7rem);
+  gap: 10px;
+}
+.bxy-floating-icons-v:before {
+  content: "";
+  background: #63646482;
+  width: 3rem;
+  height: 160px;
+  position: absolute;
+  z-index: -1;
+  left: -4px;
+  bottom: -5px;
+  border-radius: 15px;
+}
+.bxy-floating-icons-v:after {
+  content: "";
+  background: #63646482;
+  width: 105px;
+  height: 3rem;
+  position: absolute;
+  z-index: -1;
+  left: -4px;
+  bottom: -5px;
+  border-radius: 15px;
+}
+.bxy-floating-button-primary-menu svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.bxy-primary-menu {
+  background: #0e1621;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bxy-primary-icon-menu {
+  grid-column: 1;
+  grid-row: 6;
+}
+.bxy-primary-icon-fullscreen {
+  grid-column: 1;
+  grid-row: 5;
+}
+.bxy-primary-icon-palette {
+  grid-column: 1;
+  grid-row: 4;
+}
+.bxy-primary-icon-settings {
+  grid-column: 2;
+  grid-row: 6;
+}
