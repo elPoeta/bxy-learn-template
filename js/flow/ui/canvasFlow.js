@@ -179,7 +179,6 @@ class CanvasFlow {
 
   handleFullscreen(ev) {
     if (document.fullscreenElement) {
-      // exitFullscreen is only available on the Document object.
       this.exitFullscreen();
     } else {
       this.launchFullscreen();
@@ -187,13 +186,13 @@ class CanvasFlow {
   }
 
   async launchFullscreen() {
-    const canvasContainer = document.querySelector("#bxyCanvasContainer");
-    if (canvasContainer.requestFullscreen) {
-      await canvasContainer.requestFullscreen();
-    } else if (canvasContainer.mozRequestFullScreen) {
-      await canvasContainer.mozRequestFullScreen();
-    } else if (canvasContainer.webkitRequestFullscreen) {
-      await canvasContainer.webkitRequestFullscreen();
+    const body = document.querySelector("body");
+    if (body.requestFullscreen) {
+      await body.requestFullscreen();
+    } else if (body.mozRequestFullScreen) {
+      await body.mozRequestFullScreen();
+    } else if (body.webkitRequestFullscreen) {
+      await body.webkitRequestFullscreen();
     }
   }
 
