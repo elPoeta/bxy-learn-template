@@ -39,8 +39,22 @@ class CanvasFlow {
     this.isOpenedConsole = false;
     this.activeTour = false;
     this.showAxis = false;
-    this.showHidePalette = document.querySelector('#showHidePaletteBtn');
-    this.showHidePalette.addEventListener('click', this.handlePaletteRenderState.bind(this));
+    this.fullscreenBtn = document.querySelector("#fullscreen");
+    this.fullscreenBtn.addEventListener(
+      "click",
+      this.handleFullscreen.bind(this)
+    );
+    //this.fullscreenBtn.dataset.isfullscreen = "true";
+    //document.querySelector("#bxyCanvasContainer");
+    document.addEventListener("fullscreenchange", (ev) => {
+      // if (document.fullscreenElement) {
+      //   console.log(
+      //     `Element: ${document.fullscreenElement.id} entered fullscreen mode.`
+      //   );
+      // } else {
+      //   console.log("Leaving fullscreen mode.");
+      // }
+    });
   }
 
   createDependencies() {
@@ -163,9 +177,34 @@ class CanvasFlow {
     );
   }
 
-  handlePaletteRenderState(ev) {
-    this.paletteRenderState = !this.paletteRenderState;
-    this.update();
+  handleFullscreen(ev) {
+    if (document.fullscreenElement) {
+      // exitFullscreen is only available on the Document object.
+      this.exitFullscreen();
+    } else {
+      this.launchFullscreen();
+    }
+  }
+
+  async launchFullscreen() {
+    const canvasContainer = document.querySelector("#bxyCanvasContainer");
+    if (canvasContainer.requestFullscreen) {
+      await canvasContainer.requestFullscreen();
+    } else if (canvasContainer.mozRequestFullScreen) {
+      await canvasContainer.mozRequestFullScreen();
+    } else if (canvasContainer.webkitRequestFullscreen) {
+      await canvasContainer.webkitRequestFullscreen();
+    }
+  }
+
+  async exitFullscreen() {
+    if (document.exitFullscreen) {
+      await document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      await document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      await document.webkitExitFullscreen();
+    }
   }
 
   handleCollapseGrowConsole(ev) {
@@ -516,10 +555,10 @@ class CanvasFlow {
       for (let i = 0; i < children.length; i++) {
         let childs = !includeAll
           ? this.getChildren(children[i].id).filter((child) =>
-            ["whileBlock", "doWhileBlock", "forBlock", "ifBlock"].includes(
-              child.type
+              ["whileBlock", "doWhileBlock", "forBlock", "ifBlock"].includes(
+                child.type
+              )
             )
-          )
           : this.getChildren(children[i].id);
         getDescendants(childs);
         if (childs.length > 0) all = [...all, ...childs];
@@ -537,20 +576,20 @@ class CanvasFlow {
     const maxWidthBlock =
       children.length > 0
         ? children.reduce(
-          (max, child) =>
-            child.lastDimension.w > max ? child.lastDimension.w : max,
-          children[0].lastDimension.w
-        )
+            (max, child) =>
+              child.lastDimension.w > max ? child.lastDimension.w : max,
+            children[0].lastDimension.w
+          )
         : 0;
     const childIndex =
       children.length > 0
         ? children.reduce(
-          (maxIdx, child, index) =>
-            child.lastDimension.w > children[maxIdx].lastDimension.w
-              ? index
-              : maxIdx,
-          0
-        )
+            (maxIdx, child, index) =>
+              child.lastDimension.w > children[maxIdx].lastDimension.w
+                ? index
+                : maxIdx,
+            0
+          )
         : -1;
     return { maxWidthBlock, childIndex };
   }
@@ -730,8 +769,9 @@ class CanvasFlow {
       .offsetHeight;
     this.flowConsoleContainer.style.height = `${actualHeight - 45}px`;
     this.flowConsoleContainer.style.width = `${this.splitX}px`;
-    document.querySelector(".drag-console-bar-v").style.height = `${actualHeight - 45
-      }px`;
+    document.querySelector(".drag-console-bar-v").style.height = `${
+      actualHeight - 45
+    }px`;
     this.canvas.width = actualWidth - this.xOffset;
     this.canvas.height = actualHeight - this.yOffset;
     //const h = document.querySelector('.consolePromptContainer').offsetHeight + 35;
@@ -2222,22 +2262,30 @@ class CanvasFlow {
     const template = this.tabs
       .map(
         (tab, index) =>
-          `${tab.isOpened
-            ? `${this.selectedTab === index
-              ? `<div id=${tab.id} class="tab-selected ${tab.hasError ? "tab-error" : ""
-              }" title="${tab.name}" data-tabs="canvasTab">${tab.name}${tab.type !== "main" && tab.type !== "f_repo"
-                ? `<span data-closetabs="${tab.id}" style="cursor: pointer; position: relative; color: #ff0000; top: -10px; right: -5px;">x</span>`
-                : ""
-              }</div>`
-              : `<div id=${tab.id} class="tab ${tab.hasError ? "tab-error" : ""
-              }" title="${tab.name
-              }" data-tabs="canvasTab"><span data-tabs="canvasTab" id="tabName-${tab.id
-              }">${tab.name}</span>${tab.type !== "main" && tab.type !== "f_repo"
-                ? `<span data-closetabs="${tab.id}" style="cursor: pointer; position: relative; color: #8c3c3c; top: -10px; right: -5px;">x</span>`
-                : ""
-              }</div>`
-            }`
-            : ""
+          `${
+            tab.isOpened
+              ? `${
+                  this.selectedTab === index
+                    ? `<div id=${tab.id} class="tab-selected ${
+                        tab.hasError ? "tab-error" : ""
+                      }" title="${tab.name}" data-tabs="canvasTab">${tab.name}${
+                        tab.type !== "main" && tab.type !== "f_repo"
+                          ? `<span data-closetabs="${tab.id}" style="cursor: pointer; position: relative; color: #ff0000; top: -10px; right: -5px;">x</span>`
+                          : ""
+                      }</div>`
+                    : `<div id=${tab.id} class="tab ${
+                        tab.hasError ? "tab-error" : ""
+                      }" title="${
+                        tab.name
+                      }" data-tabs="canvasTab"><span data-tabs="canvasTab" id="tabName-${
+                        tab.id
+                      }">${tab.name}</span>${
+                        tab.type !== "main" && tab.type !== "f_repo"
+                          ? `<span data-closetabs="${tab.id}" style="cursor: pointer; position: relative; color: #8c3c3c; top: -10px; right: -5px;">x</span>`
+                          : ""
+                      }</div>`
+                }`
+              : ""
           }`
       )
       .join("");
@@ -2263,8 +2311,8 @@ class CanvasFlow {
       target.tagName.toLowerCase() === "div"
         ? target.getAttribute("id")
         : target.tagName.toLowerCase() === "span"
-          ? target.getAttribute("id").split("-")[1]
-          : -1;
+        ? target.getAttribute("id").split("-")[1]
+        : -1;
     const index = this.tabs.findIndex((tab) => tab.id === id);
     if (index < 0) return;
     if (this.tabs[index].selected) return;
