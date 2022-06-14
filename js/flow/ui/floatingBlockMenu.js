@@ -1,6 +1,7 @@
 class BlockMenu {
-  constructor(canvas) {
+  constructor(canvas, index) {
     this.c = canvas;
+    this.index = index;
   }
 
   show() {
@@ -11,6 +12,7 @@ class BlockMenu {
     document
       .querySelector("#bxyCanvasContainer")
       .appendChild(this.divContainer);
+    this.selectDOMElements();
     this.addListeners();
   }
 
@@ -59,15 +61,65 @@ class BlockMenu {
         </svg>
       </div>
     </section>
+
+    <section id="infoBlockFloating" class="bxy-primary-menu">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+        </svg>
+      </div>
+    </section>
     </div>`;
   }
 
+  selectDOMElements() {
+    this.buttonsMenu = document.querySelector(
+      ".bxy-floating-button-block-menu"
+    );
+  }
+
   addListeners() {
-    document;
-    this.divContainer.addEventListener("click", (ev) => {
-      this.divContainer.remove();
-      this.c.eventHandler.isEditing = false;
-      this.c.ungrabedUi();
-    });
+    this.divContainer.addEventListener("click", this.closeHandler.bind(this));
+    this.buttonsMenu.addEventListener(
+      "click",
+      this.handleFloatingButtons.bind(this)
+    );
+  }
+
+  handleFloatingButtons(ev) {
+    const target = this.getTarget(ev.target);
+    const targetId = target.id;
+    switch (targetId) {
+      case "editBlockFloating":
+        this.edit();
+        break;
+      default:
+        break;
+    }
+    //this.closeHandler();
+  }
+
+  getTarget(target) {
+    const tagName = target.tagName.toLowerCase();
+    return tagName === "section"
+      ? target
+      : tagName === "div"
+      ? target.parentElement
+      : tagName === "svg"
+      ? target.parentElement.parentElement
+      : target.parentElement.parentElement.parentElement;
+  }
+
+  edit() {
+    console.log("EDIT ", this.index);
+    //this.c.markFlowchartAsSavedUnsaved(true);
+    //this.c.program[this.index].modal();
+  }
+
+  closeHandler(ev) {
+    console.log("TRAEG CLO ", ev.target);
+    this.divContainer.remove();
+    this.c.eventHandler.isEditing = false;
+    this.c.ungrabedUi();
   }
 }

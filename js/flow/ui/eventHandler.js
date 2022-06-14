@@ -646,7 +646,7 @@ class EventHandler {
           this.isEditing = true;
           //const selectContextMenu = new SelectContextMenu(this.c, "edition");
           //selectContextMenu.filterMenu("selection", index).show(ev, { x, y });
-          const blockMenu = new BlockMenu(this.c);
+          const blockMenu = new BlockMenu(this.c, index);
           blockMenu.show();
           this.c.ungrabedUi();
         }

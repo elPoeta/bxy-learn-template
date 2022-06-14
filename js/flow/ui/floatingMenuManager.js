@@ -27,6 +27,9 @@ class FloatingMenuManager {
         break;
       case "settingsCanvas":
         break;
+      case "expandShrinkFloatingMenu":
+        this.c.expandShrinkBlocks();
+        break;
       default:
         break;
     }
