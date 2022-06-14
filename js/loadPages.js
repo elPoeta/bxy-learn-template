@@ -1,7 +1,7 @@
 const loadPages = () => {
-  const pageContainer = document.querySelector("#bxyPagesContainer");
+  //const pageContainer = document.querySelector("#bxyPagesContainer");
   const canvasContainer = document.querySelector("#bxyCanvasContainer");
-  pageContainer.innerHTML = timelinePage();
+  //pageContainer.innerHTML = timelinePage();
   const items = document.querySelectorAll(".bxy-timeline li");
 
   const isElementInViewport = (el) => {
@@ -55,12 +55,12 @@ const loadPages = () => {
     }
   };
 
-  ul.addEventListener("click", handleTimeLineItems);
-  window.addEventListener("resize", callbackFunc);
-  window.addEventListener("scroll", callbackFunc);
+  //ul.addEventListener("click", handleTimeLineItems);
+  //window.addEventListener("resize", callbackFunc);
+  //window.addEventListener("scroll", callbackFunc);
   window.flowChartEditor = new FlowChart();
   window.configEditor = {
     flow: new CustomBlock(),
   };
-  // window.flowChartEditor.createCanvas();
+  window.flowChartEditor.createCanvas();
 };
