@@ -4,12 +4,14 @@
   left: 5px;
   z-index: 5;
 }
+
 .bxy-floating-button-primary-menu-grid {
   display: grid;
-  grid-template-columns: repeat(5, 2.7rem);
-  grid-template-rows: repeat(5, 2.7rem);
+  grid-template-columns: repeat(5, 3rem);
+  grid-template-rows: repeat(5, 3rem);
   gap: 10px;
 }
+
 .bxy-floating-icons-v:before {
   content: "";
   background: #63646482;
@@ -21,6 +23,7 @@
   bottom: -5px;
   border-radius: 15px;
 }
+
 .bxy-floating-icons-v:after {
   content: "";
   background: #63646482;
@@ -32,11 +35,13 @@
   bottom: -5px;
   border-radius: 15px;
 }
+
 .bxy-floating-button-primary-menu svg {
   width: 1.5rem;
   height: 1.5rem;
 }
-.bxy-primary-menu {
+
+/* .bxy-primary-menu {
   background: #0e1621;
   width: 2.5rem;
   height: 2.5rem;
@@ -44,19 +49,78 @@
   display: flex;
   justify-content: center;
   align-items: center;
+} */
+/* .bxy-primary-menu:before {
+  content: "";
+  display: block;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #fff;
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  z-index: -1;
+} */
+
+.bxy-primary-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.bxy-primary-menu div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0e1621;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#0e1621), to(#303d55));
+  background-image: linear-gradient(top, #0e1621, #303d55);
+  background-image: -moz-linear-gradient(top, #0e1621, #303d55);
+  background-image: -ms-linear-gradient(top, #0e1621, #303d55);
+  background-image: -o-linear-gradient(top, #0e1621, #303d55);
+  color: #fff;
+  /* margin: 36px; */
+  width: 3rem;
+  height: 3rem;
+  position: relative;
+  text-align: center;
+  /* line-height: 144px; */
+  border-radius: 50%;
+  box-shadow: 0px 3px 8px #3e5072, inset 0px 2px 3px #fff;
+}
+
+.bxy-primary-menu div:before {
+  content: "";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #303d55;
+  border-top: 2px solid #3e5072;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  bottom: -2px;
+  right: -2px;
+  z-index: -1;
+  border-radius: 50%;
+  box-shadow: inset 0px 8px 48px #3e5072;
+}
+
 .bxy-primary-icon-menu {
   grid-column: 1;
   grid-row: 6;
 }
+
 .bxy-primary-icon-fullscreen {
   grid-column: 1;
   grid-row: 5;
 }
+
 .bxy-primary-icon-palette {
   grid-column: 1;
   grid-row: 4;
 }
+
 .bxy-primary-icon-settings {
   grid-column: 2;
   grid-row: 6;
