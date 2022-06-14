@@ -812,8 +812,9 @@ class EventHandler {
       const diffH =
         paletteY -
         (this.c.canvas.height -
-          document.querySelector("#canvasToolContainer").getBoundingClientRect()
-            .height) +
+          document
+            .querySelector("#hamburgerFloatingCanvas")
+            .getBoundingClientRect().height) +
         paletteH;
       this.c.yScrollPalette +=
         this.c.yScrollPalette + dy > 0 || this.c.yScrollPalette + dy < -diffH
