@@ -1,27 +1,58 @@
 class FloatingMenuManager {
   constructor() {
     this.isOpen = false;
-    this.menuButton = document.querySelector(".bxy-primary-main");
     this.floatingMenuContainer = document.querySelector(
       ".bxy-floating-button-primary-menu"
     );
     this.primaryChilds = document.querySelectorAll(".bxy-primary-child");
-    this.menuButton.addEventListener("click", this.handleMenu.bind(this));
-    this.addButtonListeners();
+    this.floatingMenuContainer.addEventListener(
+      "click",
+      this.handleFloatingButtons.bind(this)
+    );
   }
 
-  handleMenu(ev) {
+  handleFloatingButtons(ev) {
+    const target = this.getTarget(ev.target);
+    const targetId = target.id;
+    switch (targetId) {
+      case "hamburgerFloatingCanvas":
+        this.handleMenu();
+        break;
+      case "showHidePalette":
+        break;
+      case "fullscreen":
+        this.handleFullscreen();
+        break;
+      case "settingsCanvas":
+        break;
+      default:
+        break;
+    }
+    if (targetId !== "hamburgerFloatingCanvas") this.closeManager();
+  }
+
+  getTarget(target) {
+    const tagName = target.tagName.toLowerCase();
+    return tagName === "section"
+      ? target
+      : tagName === "div"
+      ? target.parentElement
+      : tagName === "svg"
+      ? target.parentElement.parentElement
+      : target.parentElement.parentElement.parentElement;
+  }
+
+  handleMenu() {
     if (this.isOpen) {
       this.closeManager();
-      this.isOpen = false;
     } else {
       this.openManager();
-      this.isOpen = true;
     }
   }
 
   openManager() {
     this.addRemoveContainerClass("add", "remove");
+    this.isOpen = true;
   }
 
   closeManager() {
@@ -33,78 +64,42 @@ class FloatingMenuManager {
     this.floatingMenuContainer.classList[actionContainer](
       "bxy-floating-button-primary-menu-grid"
     );
-    // this.floatingMenuContainer.classList[actionContainer](
-    //   "bxy-floating-icons-v"
-    // );
-    // this.floatingMenuContainer.classList[actionContainer](
-    //   "bxy-floating-icons-v"
-    // );
     this.primaryChilds.forEach((element) =>
       element.classList[actionChild]("hide")
     );
   }
 
-  addButtonListeners() {
-    this.fullscreenBtn = document.querySelector("#fullscreen");
-    this.fullscreenBtn.addEventListener(
-      "click",
-      this.handleFullscreen.bind(this)
-    );
-    document.addEventListener("fullscreenchange", (ev) => {
-      const fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
-      //const fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled;
+  removeListeners() {}
 
-      if (fullscreenElement) {
-        console.log(
-          `Element entered fullscreen mode.`
-        );
-      } else {
-        console.log("Leaving fullscreen mode.");
-      }
-    });
-  }
-
-  removeListeners() {
-    this.fullscreenBtn.removeEventListener(
-      "click",
-      this.handleFullscreen.bind(this)
-    );
-  }
-
-  handleFullscreen(ev) {
-    if (document.fullscreenElement) {
+  handleFullscreen() {
+    const fullscreenElement =
+      document.fullscreenElement ||
+      document.mozFullScreenElement ||
+      document.webkitFullscreenElement;
+    if (fullscreenElement) {
       this.exitFullscreen();
     } else {
       this.launchFullscreen();
     }
-    this.closeManager();
   }
 
   async launchFullscreen() {
-    try {
-      if (document.documentElement.requestFullscreen) {
-        await document.documentElement.requestFullscreen();
-      } else if (document.documentElement.mozRequestFullScreen) {
-        await document.documentElement.mozRequestFullScreen();
-      } else if (document.documentElement.webkitRequestFullscreen) {
-        await document.documentElement.webkitRequestFullscreen();
-      }
-    } catch (error) {
-      console.log("");
+    if (document.documentElement.requestFullscreen) {
+      await document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      await document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      await document.documentElement.webkitRequestFullscreen();
     }
   }
 
   async exitFullscreen() {
-    try {
-      if (document.exitFullscreen) {
-        await document.exitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        await document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        await document.webkitExitFullscreen();
-      }
-    } catch (error) {
-      console.log("");
+    if (document.exitFullscreen) {
+      await document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      await document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      await document.webkitExitFullscreen();
     }
   }
 }
