@@ -107,20 +107,20 @@ class IOBlock extends Block {
   }
 
   edit() {
-    document.getElementById("text-box").style.display = "block";
-    document.getElementById("text-box").style.top =
-      this.y +
-      this.c.canvas.yScroll +
-      this.c.canvas.yOffset -
-      this.h / 2 +
-      85 +
-      "px";
-    document.getElementById("text-box").style.left =
-      this.x + this.c.canvas.xScroll + "px";
-    document.getElementById("text").style.width = this.w + "px";
-    document.getElementById("text").style.fontSize = `20px`;
-    document.getElementById("text").value = this.code;
-    document.getElementById("text").blur();
+    // document.getElementById("text-box").style.display = "block";
+    // document.getElementById("text-box").style.top =
+    //   this.y +
+    //   this.c.canvas.yScroll +
+    //   this.c.canvas.yOffset -
+    //   this.h / 2 +
+    //   85 +
+    //   "px";
+    // document.getElementById("text-box").style.left =
+    //   this.x + this.c.canvas.xScroll + "px";
+    // document.getElementById("text").style.width = this.w + "px";
+    // document.getElementById("text").style.fontSize = `20px`;
+    // document.getElementById("text").value = this.code;
+    // document.getElementById("text").blur();
   }
 
   getBlockDistance(ringBlock) {
