@@ -376,10 +376,14 @@ class EventHandler {
     this.c.canvas.style.cursor = "auto";
     const mouseupTime = ev.timeStamp;
     this.timeDifference = mouseupTime - this.mousedownTime;
+    const limit = this.c.paletteManager.state.OPEN
+      ? this.c.paletteManager.getWidth()
+      : 0;
     if (this.timeDifference < this.timeStampStop) {
       const length = this.c.program.length - 1;
       if (length > 1) {
-        if (this.mouseX < 200 && this.c.program[length].grabed) {
+        if (this.mouseX < limit && this.c.program[length].grabed) {
+          if (!this.c.paletteManager.state.OPEN) return; // FIXME
           this.c.program[length].remove();
         }
       }
@@ -423,6 +427,9 @@ class EventHandler {
 
   handleWheel(ev) {
     if (this.c.selectBlock || this.c.activeTour) return;
+    const limit = this.c.paletteManager.state.OPEN
+      ? this.c.paletteManager.getWidth()
+      : 0;
     this.unSelectBlocks();
     const { x, y } = ev;
     const direction = ev.wheelDelta
@@ -432,7 +439,7 @@ class EventHandler {
       : ev.deltaY < 0
       ? 1
       : -1;
-    if (ev.clientX > 200) {
+    if (ev.clientX > limit) {
       this.zoom({ x, y, direction });
     } else {
       this.scrollPalleteWheel({ direction });
@@ -549,12 +556,15 @@ class EventHandler {
   }
 
   filterSelectedAndGrabbedBlocks({ x, y }) {
+    const limit = this.c.paletteManager.state.OPEN
+      ? this.c.paletteManager.getWidth()
+      : 0;
     return this.c.program.map((program, index) => {
       if (["start-id", "end-id"].includes(program.id)) return program;
       if (this.c.grabSplit || program.isLocked || this.c.selectBlock)
         return program;
       if (!this.isGrabbingBlock && program.isTouching(x, y)) {
-        if (this.mouseX > 200) {
+        if (this.mouseX > limit) {
           program.selected = true;
           program.grabed = true;
           this.isGrabbingBlock = true;
@@ -571,7 +581,7 @@ class EventHandler {
   }
 
   selectBlockFromPallete({ ev, x, y }) {
-    //if (!this.c.paletteRenderState) return;
+    if (!this.c.paletteManager.state.OPEN) return;
     const yPalette =
       ev.clientY -
       this.c.ctx.canvas.offsetTop -
@@ -661,6 +671,9 @@ class EventHandler {
 
   selectWorkspace(ev) {
     if (this.c.grabSplit || this.c.selectBlock) return;
+    const limit = this.c.paletteManager.state.OPEN
+      ? this.c.paletteManager.getWidth()
+      : 0;
     const { x, y } = this.screenToWorld(ev.clientX, ev.clientY);
     this.c.workspaceGrabed = true;
     this.paletteGrabed = false;
@@ -676,10 +689,10 @@ class EventHandler {
     this.c.program = this.c.program.map((program) => {
       if (
         program.isTouching(x, y) ||
-        this.mouseX < 200 || //150
+        this.mouseX < limit || //150
         this.ctrlKeyPressed
       ) {
-        if (this.mouseX < 200) {
+        if (this.mouseX < limit) {
           //150
           this.c.palette.forEach((block) => {
             if (block.isTouching(this.mouseX, this.mouseY)) {
@@ -696,7 +709,10 @@ class EventHandler {
   }
 
   setCursorPallete(ev) {
-    //if (!this.c.paletteRenderState) return;
+    if (!this.c.paletteManager.state.OPEN) {
+      this.c.canvas.style.cursor = "auto";
+      return;
+    }
     const yPalette =
       ev.clientY -
       this.c.ctx.canvas.offsetTop -
@@ -706,13 +722,17 @@ class EventHandler {
       40;
     this.c.palette.forEach((block) => {
       if (this.c.selectBlock) return;
-      if (!this.paletteGrabbed && ev.clientX <= 200) {
+      if (
+        !this.paletteGrabbed &&
+        ev.clientX <= this.c.paletteManager.getWidth()
+      ) {
         //150
         if (block.isTouching(this.mouseX, yPalette)) {
           this.c.canvas.style.cursor = "pointer";
         } else {
           if (
-            (ev.clientX > 160 && ev.clientX <= 200) || //150
+            (ev.clientX > 160 &&
+              ev.clientX <= this.c.paletteManager.getWidth()) || //150
             (ev.clientX > 0 && ev.clientX <= 40)
           ) {
             this.c.canvas.style.cursor = "row-resize";
@@ -850,8 +870,10 @@ class EventHandler {
           }
           hit = true;
           this.c.tip.style.top = "40px";
-          // this.c.tip.style.left = this.c.paletteRenderState ? "120px" : "0px"; //150 //200
-          this.c.tip.style.left = "120px";
+          this.c.tip.style.left = this.c.paletteManager.state.OPEN
+            ? `${this.c.paletteManager.getWidth()}px`
+            : "0px"; //150 //200
+          //this.c.tip.style.left = "120px";
         }
       }
       if (!hit) {
@@ -900,6 +922,9 @@ class EventHandler {
 
   blockColliding(ev) {
     const { x, y } = this.screenToWorld(ev.clientX, ev.clientY);
+    const limit = this.c.paletteManager.state.OPEN
+      ? this.c.paletteManager.getWidth()
+      : 0;
     this.innerBlocks = [];
     let hookIndex = -1;
     this.c.program = this.c.program.map((program, i) => {
@@ -942,7 +967,7 @@ class EventHandler {
             });
           }
         });
-        if (this.mouseX < 200) {
+        if (this.mouseX < limit) {
           //150
           this.c.paletteColor = this.c.colors.red;
           this.openTrash();
@@ -1208,6 +1233,7 @@ class EventHandler {
     this.c.pauseRenderX = true;
     let isDeleted = false;
     let undoDeleted = false;
+    const limit = this.c.paletteManager.getWidth();
     for (let i = 0; i < this.c.program.length; i++) {
       if (i < 0) break;
       if (this.c.program[i].error && this.c.program[i].grabed) {
@@ -1220,7 +1246,7 @@ class EventHandler {
       let grabed = this.c.program[i].grabed;
       this.c.program[i].grabed = false;
       this.c.program[i].isIntercepted = false;
-      if (this.mouseX < 200) {
+      if (this.mouseX < limit && this.c.paletteManager.state.OPEN) {
         if (
           this.c.program[i].type !== "endBlock" &&
           this.c.program[i].type !== "startBlock"
