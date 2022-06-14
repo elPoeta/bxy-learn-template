@@ -1,13 +1,13 @@
 class FloatingMenuManager {
   constructor() {
     this.isOpen = false;
-    this.isFull = false;
     this.menuButton = document.querySelector(".bxy-primary-main");
     this.floatingMenuContainer = document.querySelector(
       ".bxy-floating-button-primary-menu"
     );
     this.primaryChilds = document.querySelectorAll(".bxy-primary-child");
     this.menuButton.addEventListener("click", this.handleMenu.bind(this));
+    this.addButtonListeners();
   }
 
   handleMenu(ev) {
@@ -21,14 +21,11 @@ class FloatingMenuManager {
   }
 
   openManager() {
-    console.log("open man");
     this.addRemoveContainerClass("add", "remove");
-    this.addButtonListeners();
   }
 
   closeManager() {
     this.addRemoveContainerClass("remove", "add");
-    this.removeListeners();
     this.isOpen = false;
   }
 
@@ -54,20 +51,20 @@ class FloatingMenuManager {
       this.handleFullscreen.bind(this)
     );
     document.addEventListener("fullscreenchange", (ev) => {
-      if (document.fullscreenElement) {
-        this.isFull = true;
+      const fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+      //const fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled;
+
+      if (fullscreenElement) {
         console.log(
-          `Element: ${document.fullscreenElement.id} entered fullscreen mode.`
+          `Element entered fullscreen mode.`
         );
       } else {
         console.log("Leaving fullscreen mode.");
-        this.isFull = false;
       }
     });
   }
 
   removeListeners() {
-    if (!this.fullscreenBtn) return;
     this.fullscreenBtn.removeEventListener(
       "click",
       this.handleFullscreen.bind(this)
@@ -84,9 +81,7 @@ class FloatingMenuManager {
   }
 
   async launchFullscreen() {
-    if (this.isFull) return;
     try {
-      const body = document.querySelector("body");
       if (document.documentElement.requestFullscreen) {
         await document.documentElement.requestFullscreen();
       } else if (document.documentElement.mozRequestFullScreen) {
@@ -95,12 +90,11 @@ class FloatingMenuManager {
         await document.documentElement.webkitRequestFullscreen();
       }
     } catch (error) {
-      console.log("rerro fuul");
+      console.log("");
     }
   }
 
   async exitFullscreen() {
-    if (!this.isFull) return;
     try {
       if (document.exitFullscreen) {
         await document.exitFullscreen();
@@ -110,7 +104,7 @@ class FloatingMenuManager {
         await document.webkitExitFullscreen();
       }
     } catch (error) {
-      console.log("22222");
+      console.log("");
     }
   }
 }
