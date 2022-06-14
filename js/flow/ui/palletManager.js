@@ -1,6 +1,7 @@
 class PaletteManager {
   constructor(canvas) {
     this.c = canvas;
+    this.width = 120; //window.innerWidth > 1200 ? 200 : 120;
     this.jsonPalette = {
       io: ["define", "code", "input", "output"],
       loop: ["while", "doWhile", "for"],
@@ -21,6 +22,9 @@ class PaletteManager {
       "wrap",
     ];
     this.readyToRender = false;
+    this.state = {
+      OPEN: true,
+    };
   }
 
   setReadyToRender(isReady) {
@@ -37,6 +41,19 @@ class PaletteManager {
 
   getPalette() {
     return this.palette;
+  }
+
+  getWidth() {
+    return this.width;
+  }
+
+  setCurrentState() {
+    this.state.OPEN = !this.state.OPEN;
+  }
+
+  handleState() {
+    this.setCurrentState();
+    this.c.update();
   }
 
   createPalette(palette) {
@@ -82,7 +99,7 @@ class PaletteManager {
       this.c,
       0,
       this.yPaletteBlockAndText,
-      120, // 200 150 120
+      this.width, // 200 150 120
       15,
       LANGUAGE_FLOW[CURRENT_LANG][text],
       text,
@@ -109,7 +126,9 @@ class PaletteManager {
   //   return { x, w, h: 60 }
   // }
   getXWHBlockPalettePos(key) {
-    const x = key !== "decision" ? 20 : 60;
+    const a = this.width === 200 ? 40 : 20;
+    const b = this.width === 200 ? 100 : 60;
+    const x = key !== "decision" ? a : b;
     const w = key !== "decision" ? 120 / 1.5 : 60 / 1.5;
     return { x, w, h: 60 / 1.5 };
   }

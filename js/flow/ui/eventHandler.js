@@ -186,8 +186,9 @@ class EventHandler {
     const div = document.createElement("div");
     div.setAttribute("class", "ghostCanvasHorizontalBar");
     div.setAttribute("id", "ghostCanvasH");
-    div.style.top = `${+document.querySelector("#console-box").offsetTop + 25
-      }px`;
+    div.style.top = `${
+      +document.querySelector("#console-box").offsetTop + 25
+    }px`;
     div.style.width = document.querySelector("#console-box").offsetWidth + "px";
     div.style.right = 0;
     div.style.cursor = "grabbing";
@@ -429,8 +430,8 @@ class EventHandler {
         ? 1
         : -1
       : ev.deltaY < 0
-        ? 1
-        : -1;
+      ? 1
+      : -1;
     if (ev.clientX > 200) {
       this.zoom({ x, y, direction });
     } else {
@@ -493,17 +494,17 @@ class EventHandler {
   worldToScreen(x, y) {
     x = parseInt(
       x * this.c.scale +
-      this.c.xScroll +
-      this.c.xOffset +
-      this.c.ctx.canvas.offsetLeft
+        this.c.xScroll +
+        this.c.xOffset +
+        this.c.ctx.canvas.offsetLeft
     );
     y = parseInt(
       y * this.c.scale +
-      this.c.yScroll +
-      this.c.yOffset +
-      this.c.ctx.canvas.offsetTop -
-      6 -
-      30
+        this.c.yScroll +
+        this.c.yOffset +
+        this.c.ctx.canvas.offsetTop -
+        6 -
+        30
     );
     return { x, y };
   }
@@ -570,7 +571,7 @@ class EventHandler {
   }
 
   selectBlockFromPallete({ ev, x, y }) {
-    if (!this.c.paletteRenderState) return;
+    //if (!this.c.paletteRenderState) return;
     const yPalette =
       ev.clientY -
       this.c.ctx.canvas.offsetTop -
@@ -695,7 +696,7 @@ class EventHandler {
   }
 
   setCursorPallete(ev) {
-    if (!this.c.paletteRenderState) return;
+    //if (!this.c.paletteRenderState) return;
     const yPalette =
       ev.clientY -
       this.c.ctx.canvas.offsetTop -
@@ -849,7 +850,8 @@ class EventHandler {
           }
           hit = true;
           this.c.tip.style.top = "40px";
-          this.c.tip.style.left = this.c.paletteRenderState ? "120px" : "0px"; //150
+          // this.c.tip.style.left = this.c.paletteRenderState ? "120px" : "0px"; //150 //200
+          this.c.tip.style.left = "120px";
         }
       }
       if (!hit) {
@@ -876,9 +878,9 @@ class EventHandler {
     return !program.compileError.hasError
       ? this.addStatementToCode(program.code, program.type)
       : program.compileError.errorMessages.reduce(
-        (accumalator, currentValue) => accumalator + `${currentValue}\n`,
-        ""
-      );
+          (accumalator, currentValue) => accumalator + `${currentValue}\n`,
+          ""
+        );
   }
 
   addStatementToCode(code, type) {
@@ -1058,8 +1060,8 @@ class EventHandler {
               lastBlock && lastBlock.type === "doWhileBlock"
                 ? -lastBlock.accumulativeHeight
                 : type === "doWhileBlock"
-                  ? accumulativeHeight
-                  : 0;
+                ? accumulativeHeight
+                : 0;
             this.c.program[idx].move(x, parentBlock.y + accumNo);
             accumNo += this.c.program[idx].blockProps.fullH;
           } else {
@@ -1067,8 +1069,8 @@ class EventHandler {
               lastBlock && lastBlock.type === "doWhileBlock"
                 ? -lastBlock.accumulativeHeight
                 : type === "doWhileBlock"
-                  ? accumulativeHeight
-                  : 0;
+                ? accumulativeHeight
+                : 0;
             this.c.program[idx].move(x, parentBlock.y + accumYes);
             accumYes += this.c.program[idx].blockProps.fullH;
           }
@@ -1145,8 +1147,8 @@ class EventHandler {
     return this.loopBlocks.includes(type)
       ? this.c.arrowDistance + accumulativeHeight
       : type === "ifBlock"
-        ? this.c.arrowDistance * 2 + accumulativeHeight
-        : 0;
+      ? this.c.arrowDistance * 2 + accumulativeHeight
+      : 0;
   }
 
   setInterceptedInnerBlocksColorState({
@@ -1726,12 +1728,12 @@ class EventHandler {
     const heightToAdd =
       type === "doWhileBlock"
         ? programHook.y +
-        programRing.accumulativeHeight -
-        programHook.accumulativeHeight +
-        programHook.blockProps.accumH
+          programRing.accumulativeHeight -
+          programHook.accumulativeHeight +
+          programHook.blockProps.accumH
         : programHook.y -
-        programHook.accumulativeHeight +
-        programHook.blockProps.accumH;
+          programHook.accumulativeHeight +
+          programHook.blockProps.accumH;
     const diff = heightToAdd - programRing.y;
     this.c.blockState.add(programRing.id, {
       type,
@@ -2271,7 +2273,7 @@ class EventHandler {
           !Utils.isEmpty(programRing.code) &&
           this.c.program[i][scopeProp].hasKey(programRing.variableName) &&
           this.c.program[i][scopeProp].get(programRing.variableName).id !==
-          programRing.id &&
+            programRing.id &&
           this.c.program[i].id !== programRing.parentId &&
           this.c.program[i].id !== programRing.id
         ) {
@@ -2645,8 +2647,8 @@ class EventHandler {
           const accum = !isRemoved
             ? incrementY
             : this.ioBlocks.includes(programRing.type)
-              ? -programRing.blockProps.h
-              : -programRing.blockProps.fullH;
+            ? -programRing.blockProps.h
+            : -programRing.blockProps.fullH;
           this.c.program[index].blockProps.fullH += accum;
         }
       }

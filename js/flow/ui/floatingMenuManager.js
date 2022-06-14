@@ -1,5 +1,6 @@
 class FloatingMenuManager {
-  constructor() {
+  constructor(canvas) {
+    this.c = canvas;
     this.isOpen = false;
     this.floatingMenuContainer = document.querySelector(
       ".bxy-floating-button-primary-menu"
@@ -19,6 +20,7 @@ class FloatingMenuManager {
         this.handleMenu();
         break;
       case "showHidePalette":
+        this.handleShowHidePalette();
         break;
       case "fullscreen":
         this.handleFullscreen();
@@ -101,5 +103,9 @@ class FloatingMenuManager {
     } else if (document.webkitExitFullscreen) {
       await document.webkitExitFullscreen();
     }
+  }
+
+  handleShowHidePalette() {
+    this.c.paletteManager.handleState();
   }
 }
