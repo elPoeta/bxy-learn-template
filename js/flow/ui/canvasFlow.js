@@ -129,6 +129,7 @@ class CanvasFlow {
   addCanvasListener() {
     window.addEventListener("resize", () => {
       this.flowContainer.style.height = `${window.innerHeight}px`;
+      this.yScrollPalette = 0;
       this.resize();
     });
     this.eventHandler = new EventHandler(this);
