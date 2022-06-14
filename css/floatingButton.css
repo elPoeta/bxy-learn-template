@@ -73,12 +73,12 @@
 
 .bxy-primary-icon-fullscreen {
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 4;
 }
 
 .bxy-primary-icon-palette {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 .bxy-primary-icon-settings {
@@ -87,13 +87,13 @@
 }
 
 .bxy-primary-icon-context {
-  grid-column: 6;
-  grid-row: 6;
+  grid-column: 2;
+  grid-row: 4;
 }
 
 .bxy-primary-icon-expandShrink {
-  grid-column: 1;
-  grid-row: 4;
+  grid-column: 2;
+  grid-row: 5;
 }
 
 .bxy-primary-icon-console {
@@ -103,15 +103,15 @@
 
 .bxy-primary-icon-run {
   grid-column: 3;
-  grid-row: 6;
+  grid-row: 4;
 }
 
 .bxy-primary-icon-test {
-  grid-column: 4;
-  grid-row: 6;
+  grid-column: 3;
+  grid-row: 5;
 }
 
 .bxy-primary-icon-debug {
-  grid-column: 5;
+  grid-column: 3;
   grid-row: 6;
 }
