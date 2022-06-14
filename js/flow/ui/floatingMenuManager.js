@@ -33,12 +33,12 @@ class FloatingMenuManager {
     this.floatingMenuContainer.classList[actionContainer](
       "bxy-floating-button-primary-menu-grid"
     );
-    this.floatingMenuContainer.classList[actionContainer](
-      "bxy-floating-icons-v"
-    );
-    this.floatingMenuContainer.classList[actionContainer](
-      "bxy-floating-icons-v"
-    );
+    // this.floatingMenuContainer.classList[actionContainer](
+    //   "bxy-floating-icons-v"
+    // );
+    // this.floatingMenuContainer.classList[actionContainer](
+    //   "bxy-floating-icons-v"
+    // );
     this.primaryChilds.forEach((element) =>
       element.classList[actionChild]("hide")
     );
