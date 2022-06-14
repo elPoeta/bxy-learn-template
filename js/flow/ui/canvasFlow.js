@@ -45,7 +45,7 @@ class CanvasFlow {
     this.graph = new Graph();
     this.blockState = new BlockState();
     this.saveFlowchartCodeToFile = new SaveFlowchartCodeToFile();
-    new FloatingMenuManager();
+    new FloatingMenuManager(this);
   }
 
   initialValues() {
@@ -109,7 +109,6 @@ class CanvasFlow {
       decision: ["if"],
       wrap: ["wrap"],
     };
-    this.paletteRenderState = true;
   }
 
   render() {
@@ -608,9 +607,9 @@ class CanvasFlow {
   }
 
   updateRenderPalette() {
-    if (!this.paletteRenderState) return;
+    if (!this.paletteManager.state.OPEN) return;
     this.ctx.fillStyle = this.paletteColor;
-    this.ctx.fillRect(0, 0, 120, this.canvas.height); // 200 150 100
+    this.ctx.fillRect(0, 0, this.paletteManager.getWidth(), this.canvas.height); // 200 150 100
     this.ctx.lineWidth = 2; //3
     this.ctx.save();
     this.ctx.setTransform(1, 0, 0, 1, 0, this.yScrollPalette);
