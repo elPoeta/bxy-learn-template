@@ -36,10 +36,10 @@ class EventHandler {
     );
     this.c.canvas.addEventListener("mouseup", this.handlerMouseUp.bind(this));
     this.c.canvas.addEventListener("click", this.handlerMouseClick.bind(this));
-    this.c.canvas.addEventListener(
-      "contextmenu",
-      this.showContextMenu.bind(this)
-    );
+    // this.c.canvas.addEventListener(
+    //   "contextmenu",
+    //   this.showContextMenu.bind(this)
+    // );
     this.c.canvas.addEventListener("wheel", this.handleWheel.bind(this));
     this.c.canvas.addEventListener(
       "touchstart",
@@ -241,7 +241,7 @@ class EventHandler {
     const tapLength = currentTime - this.lastTap;
     const diffTime = ev.timeStamp - this.startTouch;
     if (diffTime <= 500 && tapLength <= 500 && tapLength > 0) {
-      this.openContextMenuOnTouchEnd();
+      //this.openContextMenuOnTouchEnd();
     } else {
       if (this.isPinch) {
         this.updateMouseUp();
@@ -473,8 +473,9 @@ class EventHandler {
     const diffH =
       paletteY -
       (this.c.canvas.height -
-        document.querySelector("#canvasToolContainer").getBoundingClientRect()
-          .height) +
+        document
+          .querySelector("#hamburgerFloatingCanvas")
+          .getBoundingClientRect().height) +
       paletteH;
     this.c.yScrollPalette +=
       this.c.yScrollPalette + dy > 0 || this.c.yScrollPalette + dy < -diffH
@@ -643,8 +644,10 @@ class EventHandler {
       if (program.cogwheel) {
         if (program.cogwheel.isTouching(x, y)) {
           this.isEditing = true;
-          const selectContextMenu = new SelectContextMenu(this.c, "edition");
-          selectContextMenu.filterMenu("selection", index).show(ev, { x, y });
+          //const selectContextMenu = new SelectContextMenu(this.c, "edition");
+          //selectContextMenu.filterMenu("selection", index).show(ev, { x, y });
+          const blockMenu = new BlockMenu(this.c);
+          blockMenu.show();
           this.c.ungrabedUi();
         }
       }

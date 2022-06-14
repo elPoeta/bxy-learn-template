@@ -1,0 +1,28 @@
+.blockFloatingMenuContainerOverlay {
+  position: absolute;
+  top: 0px;
+  height: 100vh;
+  width: 100vw;
+}
+.bxy-floating-button-block-menu {
+  position: absolute;
+  display: grid;
+
+  gap: 10px;
+  bottom: 5px;
+  right: 5px;
+  z-index: 200;
+}
+.bxy-floating-button-block-menu-grid-h {
+  grid-template-columns: repeat(5, 3rem);
+  grid-template-rows: 3rem;
+}
+.bxy-floating-button-block-menu-grid-v {
+  grid-template-columns: 3rem;
+  grid-template-rows: repeat(5, 3rem);
+}
+
+.bxy-floating-button-block-menu svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
