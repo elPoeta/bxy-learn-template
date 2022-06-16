@@ -169,6 +169,8 @@
   grid-template-rows: auto auto 1fr 1fr;
   box-shadow: -1px -4px 14px -3px rgb(17 54 115 / 70%);
 }
+
+/* SETTINGS */
 .flowToolSettings {
   padding: 10px;
   justify-self: center;
@@ -457,3 +459,11 @@
 	background-color: #34adee;
 	border: 2px solid #0e435f;
 } */
+
+.zoomLevel {
+  color: #242f3d85;
+  font-size: 3.5rem;
+  position: absolute;
+  top: 50px;
+  font-weight: bold;
+}

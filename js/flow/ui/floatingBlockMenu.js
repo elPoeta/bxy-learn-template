@@ -112,8 +112,8 @@ class BlockMenu {
 
   edit() {
     console.log("EDIT ", this.index);
-    //this.c.markFlowchartAsSavedUnsaved(true);
-    //this.c.program[this.index].modal();
+    this.c.markFlowchartAsSavedUnsaved(true);
+    this.c.program[this.index].modal();
   }
 
   closeHandler(ev) {

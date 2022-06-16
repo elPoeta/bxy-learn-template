@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark light">
   <link rel="stylesheet" href="./css/floatingButton.css">
+  <link rel="stylesheet" href="./css/wizard.css">
   <link rel="stylesheet" href="./css/contextBlockMenu.css">
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/debug.css">
@@ -33,6 +34,25 @@
   <script src="./js/flow/blockManager/wizardCreatorManager.js" defer></script>
   <script src="./js/flow/blockManager/wrapFormFactory.js" defer></script>
 
+  <script src="./js/flow/forms/dnd/dragAndDrop.js" defer></script>
+  <script src="./js/flow/forms/dnd/dragAndDropFunctionDefine.js" defer></script>
+  <script src="./js/flow/forms/dnd/dragAndDropFunctionParam.js" defer></script>
+
+  <script src="./js/flow/forms/editorFlowForm.js" defer></script>
+  <script src="./js/flow/forms/reportBugFlow.js" defer></script>
+  <script src="./js/flow/forms/wizardEditVarFuncBase.js" defer></script>
+  <script src="./js/flow/forms/wizardNewVariableForm.js" defer></script>
+  <script src="./js/flow/forms/wizardEditBoolItem.js" defer></script>
+  <script src="./js/flow/forms/wizardEditFuncItem.js" defer></script>
+  <script src="./js/flow/forms/wizardEditItem.js" defer></script>
+  <script src="./js/flow/forms/wizardEditVarItem.js" defer></script>
+  <script src="./js/flow/forms/wizardForm.js" defer></script>
+  <script src="./js/flow/forms/wizardFunctionParamForm.js" defer></script>
+  <script src="./js/flow/forms/wizardNewVariableDefineForm.js" defer></script>
+  <script src="./js/flow/forms/wizardNewVariableForForm.js" defer></script>
+  <script src="./js/flow/forms/wrapBlockForm.js" defer></script>
+  <script src="./js/flow/forms/wrapJavaBlockWizardForm.js" defer></script>
+  <script src="./js/flow/forms/wrapJavascriptBlockForm.js" defer></script>
 
   <script src="./js/flow/blocks/block.js" defer></script>
   <script src="./js/flow/blocks/containerBlock.js" defer></script>
@@ -107,7 +127,7 @@
   <title>Browxy Learn</title>
 </head>
 
-<body id="body">
+<body>
   <main>
     <section id="bxyCanvasContainer">
       <div id="flowContainer">
@@ -166,7 +186,7 @@
         <div id="canvasToolContainer" class="canvasToolContainer hide">
           <p id="flowProjectName" class="flow-project-name" title=""></p>
           <p id="flowProjectTimer" class="flow-project-name" title="Left Time"></p>
-          <div class="zoom-info">&#x1F50D;&nbsp;<span id="zoom-level-info-value">0x</span></div>
+          <!-- <div class="zoom-info">&#x1F50D;&nbsp;<span id="zoom-level-info-value">0x</span></div> -->
           <div id="flowTooltipLang" class="flowToolSettings" title="Toggle language EN/ES">
             <svg class="icon-svg icon-flow icon-flow-lang" version="1.1" xmlns="http://www.w3.org/2000/svg" width="20"
               height="20" viewBox="0 0 20 20">
@@ -306,7 +326,12 @@
           </div>
         </section>
 
+
+
+
+
       </div>
+      <span id="zoom-level-info-value" class="zoomLevel hide">0x</span>
     </section>
     <section id="bxyPagesContainer" class="hide"></section>
   </main>

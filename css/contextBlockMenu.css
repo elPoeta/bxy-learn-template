@@ -20,7 +20,6 @@
   grid-template-columns: 3rem;
   grid-template-rows: repeat(6, 3rem);
 }
-
 .bxy-floating-button-block-menu svg {
   width: 1.5rem;
   height: 1.5rem;
