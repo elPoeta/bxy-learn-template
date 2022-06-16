@@ -4,26 +4,22 @@
   left: 5px;
   z-index: 200;
 }
-
 .bxy-floating-button-primary-menu-grid {
   display: grid;
   grid-template-columns: repeat(5, 3rem);
   grid-template-rows: repeat(5, 3rem);
   gap: 10px;
 }
-
 .bxy-floating-button-primary-menu svg {
   width: 1.5rem;
   height: 1.5rem;
 }
-
 .bxy-primary-menu {
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
-
 .bxy-primary-menu div {
   display: flex;
   justify-content: center;
@@ -48,7 +44,6 @@
   border-radius: 50%;
   box-shadow: 0px 3px 8px #3e5072, inset 0px 2px 3px #fff;
 }
-
 .bxy-primary-menu div:before {
   content: "";
   display: flex;
@@ -65,52 +60,42 @@
   border-radius: 50%;
   box-shadow: inset 0px 8px 48px #3e5072;
 }
-
 .bxy-primary-icon-menu {
   grid-column: 1;
   grid-row: 6;
 }
-
 .bxy-primary-icon-fullscreen {
   grid-column: 1;
   grid-row: 4;
 }
-
 .bxy-primary-icon-palette {
   grid-column: 1;
   grid-row: 3;
 }
-
 .bxy-primary-icon-settings {
   grid-column: 1;
   grid-row: 5;
 }
-
 .bxy-primary-icon-context {
   grid-column: 2;
   grid-row: 4;
 }
-
 .bxy-primary-icon-expandShrink {
   grid-column: 2;
   grid-row: 5;
 }
-
 .bxy-primary-icon-console {
   grid-column: 2;
   grid-row: 6;
 }
-
 .bxy-primary-icon-run {
   grid-column: 3;
   grid-row: 4;
 }
-
 .bxy-primary-icon-test {
   grid-column: 3;
   grid-row: 5;
 }
-
 .bxy-primary-icon-debug {
   grid-column: 3;
   grid-row: 6;

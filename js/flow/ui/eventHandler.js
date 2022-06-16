@@ -463,6 +463,8 @@ class EventHandler {
     this.c.xScroll -= wx * this.c.canvas.width * zoom;
     this.c.yScroll -= wy * this.c.canvas.height * zoom;
     this.c.scale += zoom;
+    document.querySelector("#zoom-level-info-value").classList.remove("hide");
+    this.c.zoomTime = Date.now();
     this.c.updateCanvas();
   }
 

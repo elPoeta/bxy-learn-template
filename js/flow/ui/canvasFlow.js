@@ -109,6 +109,7 @@ class CanvasFlow {
       decision: ["if"],
       wrap: ["wrap"],
     };
+    this.zoomTime = 0;
   }
 
   render() {
@@ -675,9 +676,12 @@ class CanvasFlow {
   }
 
   zoomLevelInfo() {
-    document.querySelector(
-      "#zoom-level-info-value"
-    ).innerHTML = `${this.scale.toFixed(2)}x`;
+    const zoomLevel = document.querySelector("#zoom-level-info-value");
+    zoomLevel.style.left = this.paletteManager.state.OPEN ? "125px" : "10px";
+    const now = Date.now();
+    zoomLevel.innerHTML = `${this.scale.toFixed(2)}x`;
+    const diffTime = now - this.zoomTime;
+    if (diffTime >= 1000) zoomLevel.classList.add("hide");
   }
 
   moveVerticalGhostBar(mouseX) {
