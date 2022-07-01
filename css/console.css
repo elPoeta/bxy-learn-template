@@ -1,7 +1,7 @@
 /* Flow Floating Console */
 .flow-console {
   position: absolute;
-  top: 40px;
+  top: -9999px;
   right: 0;
   min-width: 40px;
   min-height: 25px;

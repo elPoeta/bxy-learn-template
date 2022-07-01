@@ -93,6 +93,21 @@ class BlockMenu {
       case "editBlockFloating":
         this.edit();
         break;
+      case "colorBlockFloating":
+        const items = !this.c.wizardItems.length
+          ? WizardItems.getAllItems()
+          : this.c.wizardItems;
+        const builderItems = WizardItems.getItemsByTypeBlock(
+          items,
+          this.c.program[this.index].type
+        );
+        const wizardWorkspace = new WizardWorkspace({
+          canvas: this.c,
+          block: this.c.program[this.index],
+          blockIndex: this.index,
+          builderItems,
+        });
+        wizardWorkspace.render();
       default:
         break;
     }
@@ -111,13 +126,11 @@ class BlockMenu {
   }
 
   edit() {
-    console.log("EDIT ", this.index);
     this.c.markFlowchartAsSavedUnsaved(true);
     this.c.program[this.index].modal();
   }
 
   closeHandler(ev) {
-    console.log("TRAEG CLO ", ev.target);
     this.divContainer.remove();
     this.c.eventHandler.isEditing = false;
     this.c.ungrabedUi();
