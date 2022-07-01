@@ -64,3 +64,5 @@ const loadPages = () => {
   };
   window.flowChartEditor.createCanvas();
 };
+
+window.addEventListener("load", loadPages);

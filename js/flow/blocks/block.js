@@ -14,6 +14,7 @@ class Block {
   ) {
     this.id = id;
     this.c = canvas;
+    this.blockFactorDimension = canvas.blockFactorDimension;
     this.type = type;
     this.x = x;
     this.y = y;
@@ -37,8 +38,8 @@ class Block {
     this.incrementWidthRightLine = 0;
     this.parentId = null;
     this.isProgram = isProgram;
-    this.fontSize = 16;
-    this.fontSizeCode = 16;
+    this.fontSize = canvas.blockFactorDimension === 1.5 ? 20 : 16;
+    this.fontSizeCode = canvas.blockFactorDimension === 1.5 ? 16 : 20;
     this.textProps = { startText: 10, verticalAlignText: 1.5, substring: 10 };
     this.fontName = "Roboto";
     this.languageOutput = languageOutput;
@@ -67,6 +68,7 @@ class Block {
 
   renderCogwheel() {
     if (this.cogwheel !== null && this.c.renderCogwheel) {
+      if (!this.hooks[0].occupied || this.isLocked) return;
       this.cogwheel.render();
     }
   }
@@ -217,9 +219,7 @@ class Block {
       "height: 335px; top: -130px; width: max-content; padding: 15px 10px; text-align:left;";
     return `<div id="window-dim-code" class="window-dim-code-default">
           <div id="window-code" class="window-modal custom-gray-scroll">
-            <h2 style="width:125px;font-size:1.4rem;position:absolute;top:20px;right:20px;color:#777;text-shadow: 2px 2px #bbbbbb;text-align:end;">${
-              props.title
-            }</h2> 
+            <h2>${props.title}</h2> 
             <div class="builder-tabs">
               <div id="manualBuilderTab" class="builder-tabs-tab builder-tab-active">Manual</div>
               <div id="wizardBuilderTab" class="builder-tabs-tab builder-tab-inactive">Wizard</div>
@@ -235,14 +235,14 @@ class Block {
                   </span>
                 </div>  
               </div>
-              <form id="blockForm" name="blockForm">
+              <form id="blockForm" name="blockForm" class="blockFormManual-form">
                 ${props.content}
                 ${this.templateButtons("buttons", "ok-modal", "cancel-modal")}
               </form>
             </section>
-            <section id="wizardBuilder" class="hide" style="width:inherit;max-height:100vh;">
+            <section id="wizardBuilder" class="hide" style="width:inherit;">
               <div id="wizardBuilderContent"></div>
-              <div style="display: flex;align-items: end;width: inherit;">
+              <div class="buttons-wizzard-switches">
                 ${this.templateSwitch()}
                 ${this.templateButtons(
                   "buttonsWizard",
@@ -275,16 +275,16 @@ class Block {
   }
 
   templateSwitch() {
-    return `<section style="display: flex;align-items: center;margin-right: auto;font-size: 1.2em;">
-         <div style="display: flex;align-items: center;margin-right: 20px;">
-           <p style="margin-right:5px;" >View code</p>
+    return `<section class="wizard-switches">
+         <div class="wizard-switches-1">
+           <p>View code</p>
            <label class="switch-subitem">
              <input id="viewRealBuildedExpression" name="viewRealBuildedExpression" type="checkbox" />
              <span class="slider-subitem"></span>
            </label>
          </div>
-         <div style="display: flex;align-items: center;">
-           <p style="margin-right:5px;" >Validate</p>
+         <div class="wizard-switches-2" >
+           <p>Validate</p>
            <label class="switch-subitem">
              <input id="validateExpressionSwitch" name="validateExpressionSwitch" type="checkbox" checked />
              <span class="slider-subitem"></span>
@@ -337,13 +337,16 @@ class Block {
     ev.preventDefault();
     const target = ev.target;
     if (target.id === "manualBuilderTab") {
-      this.updateWizardGridStyles(
-        document.querySelector("#changeWizardGridBottom")
+      // this.updateWizardGridStyles(
+      //   document.querySelector("#changeWizardGridLeft")
+      // );
+      this.handleWizardGridSystem(
+        document.querySelector("#changeWizardGridLeft")
       );
       this.toggleBuilderClass(target, "manualBuilder", "wizardBuilder");
     } else if (target.id === "wizardBuilderTab") {
       this.toggleBuilderClass(target, "wizardBuilder", "manualBuilder");
-      this.updateWizardGridStyles(
+      this.handleWizardGridSystem(
         document.querySelector("#changeWizardGridLeft")
       );
     }
@@ -404,7 +407,28 @@ class Block {
       target.classList.contains("change-wizard-grid-active")
     )
       return;
-    this.updateWizardGridStyles(target);
+    this.handleWizardGridSystem(target);
+  }
+
+  handleWizardGridSystem(target) {
+    if (this.blockFactorDimension === 1) {
+      this.updateWizardGridStyles(target);
+    } else {
+      this.updateWizardLearn();
+    }
+  }
+
+  updateWizardLearn() {
+    const h = window.innerHeight - 105;
+    document.querySelector("#wizardBuilder").style.height = `${h}px`;
+    document.querySelector("#changeWizardGridContainer").style.display = "none";
+    if (!["defineBlock", "inputBlock", "forBlock"].includes(this.type)) return;
+    document
+      .querySelectorAll(".wizardForDropTitle")
+      .forEach((el) => el.classList.add("hide"));
+    document
+      .querySelectorAll(".wizardForDrop")
+      .forEach((el) => (el.style.height = "75px"));
   }
 
   updateWizardGridStyles(target) {
@@ -613,7 +637,7 @@ class Block {
     const { w, h } = flowChartEditor.API.getWidthAndHeigthBlock("wrapBlock");
     this.c.program.push(
       BlockFactory.getImplementation(
-        flowChartEditor.uuid(),
+        Utils.uuid(),
         this.c,
         "wrapBlock",
         0,
