@@ -1,0 +1,55 @@
+.markdown-log-container {
+  overflow: hidden;
+  height: 100vh;
+  height: 100wh;
+  padding: 5px;
+  background: #fff;
+}
+.markdown-log-container span {
+  font-size: 2em;
+  color: #242f3d;
+  display: flex;
+  justify-content: end;
+  font-weight: bold;
+}
+.markdown-body-custom {
+  overflow: auto;
+  height: 90vh;
+  margin: 10px 0 20px 0;
+}
+.hr-center-ball {
+  background: #242f3d;
+  border: 0;
+  height: 3px;
+  width: 100%;
+  margin: 5px auto;
+}
+
+.bxy-floating-button-secondary-menu {
+  position: absolute;
+  top: 45px;
+  right: 5px;
+}
+.bxy-secondary-icon-menu {
+  grid-column: 6;
+  grid-row: 1;
+}
+.bxy-secondary-icon-folder {
+  grid-column: 5;
+  grid-row: 1;
+}
+.bxy-secondary-icon-floppy {
+  grid-column: 4;
+  grid-row: 1;
+}
+.bxy-secondary-icon-floppy svg {
+  fill: #fff;
+}
+.bxy-secondary-icon-md {
+  grid-column: 6;
+  grid-row: 2;
+}
+.bxy-secondary-icon-code {
+  grid-column: 6;
+  grid-row: 3;
+}

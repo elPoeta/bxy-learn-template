@@ -86,22 +86,22 @@ class SecondaryMenuManager {
   }
 
   handleMDMenu() {
-    const compositeId = this.c.projectCompositeId;
-    if (!compositeId) {
-      browxyStartUp.toast.show({
-        type: "info",
-        title: "Message",
-        message: "Description not found",
-        icon: FlowIcons.getIcon({
-          icon: "info",
-          title: "Info",
-          id: "Utils.uuid()",
-          className: "iconsvg-info",
-        }),
-      });
-      return;
-    }
-    new MarkdownLog(this.c).checkMDFile(compositeId);
+    // const compositeId = this.c.projectCompositeId;
+    // if (!compositeId) {
+    //   browxyStartUp.toast.show({
+    //     type: "info",
+    //     title: "Message",
+    //     message: "Description not found",
+    //     icon: FlowIcons.getIcon({
+    //       icon: "info",
+    //       title: "Info",
+    //       id: "Utils.uuid()",
+    //       className: "iconsvg-info",
+    //     }),
+    //   });
+    //   return;
+    // }
+    new MarkdownLog(this.c).checkMDFile();
   }
 
   handleCodeMenu() {

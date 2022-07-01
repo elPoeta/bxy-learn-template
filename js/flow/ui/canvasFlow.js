@@ -46,6 +46,7 @@ class CanvasFlow {
     this.blockState = new BlockState();
     this.saveFlowchartCodeToFile = new SaveFlowchartCodeToFile();
     new FloatingMenuManager(this);
+    new SecondaryMenuManager(this);
   }
 
   initialValues() {
