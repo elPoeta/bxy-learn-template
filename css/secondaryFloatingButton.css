@@ -53,3 +53,27 @@
   grid-column: 6;
   grid-row: 3;
 }
+
+.codeLogContainer {
+  overflow: hidden;
+  height: 100vh;
+  height: 100wh;
+  padding: 5px;
+  background: #fff;
+}
+#codeFlowEditor {
+  height: 95%;
+  border: 1px solid #ccc;
+}
+.buttons-code-log-container {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.buttons-code-log-container button:first-child {
+  padding: 5px;
+  outline: none;
+  width: 40px;
+  font-weight: bold;
+}

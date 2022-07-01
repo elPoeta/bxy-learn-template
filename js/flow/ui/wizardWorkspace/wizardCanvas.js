@@ -62,7 +62,6 @@ class WizardCanvas {
     this.mouseY = ev.clientY - this.ctx.canvas.offsetTop;
     this.items = this.items.map((item) => {
       if (item.isTouching(this.mouseX, this.mouseY)) {
-        //item.grab = true;
         item.move(
           this.mouseX - item.grabPosition.x,
           this.mouseY - item.grabPosition.y
@@ -74,7 +73,6 @@ class WizardCanvas {
   }
 
   handlerMouseUp(ev) {
-    console.log("UP");
     this.mouseX = ev.clientX - this.ctx.canvas.offsetLeft;
     this.mouseY = ev.clientY - this.ctx.canvas.offsetTop;
     this.items = this.items.map((item) => {
