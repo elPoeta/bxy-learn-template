@@ -15,12 +15,12 @@ class FlowChart {
     // this.widthRight = document.querySelector('#bxy_compiler');
     //this.switchButton = document.querySelector('#switchButton');
     //this.switchButton.addEventListener('click', this.switchWorkspaceHandler.bind(this));
-    this.btnLanguageFlow = document.querySelector("#flowTooltipLang");
-    this.btnLanguageFlow.addEventListener(
-      "click",
-      this.changeLanguageHandler.bind(this)
-    );
-    this.flowLangCheckBox = document.querySelector("#langFlow");
+    // this.btnLanguageFlow = document.querySelector("#flowTooltipLang");
+    // this.btnLanguageFlow.addEventListener(
+    //   "click",
+    //   this.changeLanguageHandler.bind(this)
+    // );
+    // this.flowLangCheckBox = document.querySelector("#langFlow");
     this.btnSettingsFlow = document.querySelector("#flowSettings");
     this.canvasToolContainer = document.querySelector("#canvasToolContainer");
     this.btnSettingsFlow.addEventListener(

@@ -304,7 +304,11 @@ class IfBlock extends Block {
 
   updateHooksMove(x, y) {
     this.hooks[0].x = x;
-    this.hooks[0].y = y;
+    if (this.grabed) {
+      this.hooks[0].y = y - 30;
+    } else {
+      this.hooks[0].y = y;
+    }
     this.hooks[0].w = this.w;
     this.hooks[0].h = this.h;
     this.hooks[1].x = x;
