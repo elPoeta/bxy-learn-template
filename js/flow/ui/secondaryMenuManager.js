@@ -105,6 +105,6 @@ class SecondaryMenuManager {
   }
 
   handleCodeMenu() {
-    new SourceCodeLog(this.c);
+    new SourceCodeLog(this.c).getCode().render();
   }
 }

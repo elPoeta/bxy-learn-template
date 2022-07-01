@@ -45,6 +45,7 @@ class WizardWorkspace {
 
   createCanvas() {
     this.canvasWizard = new WizardCanvas(300, 300);
+    this.canvasWizard.update();
     // this.animate(0);
   }
 
